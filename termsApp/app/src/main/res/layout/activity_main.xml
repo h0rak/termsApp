@@ -6,15 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UI.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Moon's Out University"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="174dp"
@@ -40,7 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="EnterTerms"
+        android:clickable="true"
         android:text="Enter"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

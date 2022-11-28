@@ -1,7 +1,11 @@
 package com.example.termsapp.Entity;
 
+import android.app.Application;
+import com.example.termsapp.Database.Repository;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.example.termsapp.Database.Repository;
 
 @Entity(tableName = "Terms")
 public class Term {
@@ -18,6 +22,7 @@ public class Term {
         this.termStart = termStart;
         this.termEnd = termEnd;
     }
+
 
     public int getTermID() {
         return termID;
