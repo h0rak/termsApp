@@ -3,6 +3,8 @@ package com.example.termsapp.Entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity(tableName = "Courses")
 public class Course {
     @PrimaryKey(autoGenerate = true)
@@ -13,8 +15,9 @@ public class Course {
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
+    private int termID;
 
-    public Course(int courseID, String courseName, String courseStart, String courseEnd, String instructorName, String instructorPhone, String instructorEmail) {
+    public Course(int courseID, String courseName, String courseStart, String courseEnd, String instructorName, String instructorPhone, String instructorEmail, int termID) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseStart = courseStart;
@@ -22,6 +25,10 @@ public class Course {
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
+        this.termID = termID;
+    }
+
+    public Course() {
     }
 
     public int getCourseID() {
@@ -78,6 +85,14 @@ public class Course {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
+    }
+
+    public int getTermID() {
+        return termID;
+    }
+
+    public void setTermID(int termID) {
+        this.termID = termID;
     }
 
     @Override

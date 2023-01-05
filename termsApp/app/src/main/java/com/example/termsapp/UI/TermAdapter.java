@@ -8,35 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.termsapp.Entity.Course;
+
 import com.example.termsapp.Entity.Term;
 import com.example.termsapp.R;
 import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
-    class TermViewHolder extends RecyclerView.ViewHolder{
-
-        private final TextView termItemView;
-
-        private TermViewHolder(View itemView){ // testing ADDED params
-            super(itemView);
-            termItemView = itemView.findViewById(R.id.termNameInput);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    final Term current = mTerms.get(position);
-                    Intent intent = new Intent(context, CourseList.class); // course.class was the mistake here
-                    intent.putExtra("id", current.getTermID()); // these bridge term list to course list?
-                    intent.putExtra("name", current.getTermName());
-                    intent.putExtra("start", current.getTermStart());
-                    intent.putExtra("end", current.getTermEnd());
-                    context.startActivity(intent);
-                }
-            });
-        }
-    }
 
     private List<Term> mTerms;
     private final Context context;
@@ -44,6 +21,28 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     public TermAdapter(Context context){
         mInflator = LayoutInflater.from(context);
         this.context = context;
+    }
+
+    class TermViewHolder extends RecyclerView.ViewHolder{
+
+        private final TextView termItemView;
+        private TermViewHolder(View itemView){ // testing ADDED params
+            super(itemView);
+            termItemView = itemView.findViewById(R.id.textView1);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    final Term current = mTerms.get(position);
+                    Intent intent = new Intent(context, TermDetailCourseList.class); // course.class was the mistake here
+                    intent.putExtra("id", current.getTermID()); // these bridge term list to term detail list?
+                    intent.putExtra("name", current.getTermName());
+                    intent.putExtra("start", current.getTermStart());
+                    intent.putExtra("end", current.getTermEnd());
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
 
     @NonNull
@@ -72,9 +71,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
     @Override
     public int getItemCount() {
-        if (mTerms!=null){
-            return mTerms.size();
-        }
-        return 0;
+        return mTerms.size();
     }
 }

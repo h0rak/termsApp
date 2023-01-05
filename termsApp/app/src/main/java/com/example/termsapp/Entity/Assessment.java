@@ -10,14 +10,17 @@ public class Assessment {
     private Boolean isPerformanceBased;
     private String assessmentStart;
     private String assessmentEnd;
-    // private TriggerEventListener??
+    private int courseID;
 
-
-    public Assessment(int assessmentID, Boolean isPerformanceBased, String assessmentStart, String assessmentEnd) {
+    public Assessment(int assessmentID, Boolean isPerformanceBased, String assessmentStart, String assessmentEnd, int courseID) {
         this.assessmentID = assessmentID;
         this.isPerformanceBased = isPerformanceBased;
         this.assessmentStart = assessmentStart;
         this.assessmentEnd = assessmentEnd;
+        this.courseID = courseID;
+    }
+
+    public Assessment() {
     }
 
     public int getAssessmentID() {
@@ -50,6 +53,14 @@ public class Assessment {
 
     public void setAssessmentEnd(String assessmentEnd) {
         this.assessmentEnd = assessmentEnd;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 
     @Override
