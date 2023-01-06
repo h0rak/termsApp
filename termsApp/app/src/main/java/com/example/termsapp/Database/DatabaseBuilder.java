@@ -12,7 +12,7 @@ import com.example.termsapp.Entity.Assessment;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
 
-@Database(entities = {Term.class, Course.class, Assessment.class}, version = 2, exportSchema = false)
+@Database(entities = {Term.class, Course.class, Assessment.class}, version = 6, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract TermDAO termDAO();
@@ -25,8 +25,11 @@ public abstract class DatabaseBuilder extends RoomDatabase {
         if (INSTANCE == null) {
             synchronized (DatabaseBuilder.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), DatabaseBuilder.class, "myDatabaseBuilder.db").fallbackToDestructiveMigration().allowMainThreadQueries().build();}
-            } // added in .allowMainThreadQueries()
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), DatabaseBuilder.class, "myDatabaseBuilder.db")
+                            .fallbackToDestructiveMigration()
+                            .build();
+                }
+            }
         }
         return INSTANCE;
     }

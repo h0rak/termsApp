@@ -3,6 +3,7 @@ package com.example.termsapp.Entity;
 import android.app.Application;
 import com.example.termsapp.Database.Repository;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -62,6 +63,7 @@ public class Term {
         this.termEnd = termEnd;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Term{" +

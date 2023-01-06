@@ -32,45 +32,106 @@ public class Repository {
     }
 
     public List<Term> getAllTerms(){
-        mAllTerms=mTermDAO.getAllTerms();
+        databaseExecutor.execute(()->{
+            mAllTerms=mTermDAO.getAllTerms();
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return mAllTerms;
     }
 
     public List<Course> getAllCourses(){
-        mAllCourses=mCourseDAO.getAllCourses();
+        databaseExecutor.execute(()->{
+            mAllCourses=mCourseDAO.getAllCourses();
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return mAllCourses;
     }
 
     public List<Assessment> getAllAssessments(){
-        mAllAssessments=mAssessmentDAO.getAllAssessments();
+        databaseExecutor.execute(()->{
+            mAllAssessments=mAssessmentDAO.getAllAssessments();
+        });
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return mAllAssessments;
     }
 
     public void insert(Term term){
-        mTermDAO.insert(term);
+        databaseExecutor.execute(()->{
+            mTermDAO.insert(term);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insert(Course course){
-        mCourseDAO.insert(course);
+        databaseExecutor.execute(()->{
+            mCourseDAO.insert(course);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void delete(Term term){
-        mTermDAO.delete(term);
-    }
+        databaseExecutor.execute(()->{
+            mTermDAO.delete(term);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }    }
 
     public void delete(Course course){
-        mCourseDAO.delete(course);
-    }
+        databaseExecutor.execute(()->{
+            mCourseDAO.delete(course);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }    }
 
     public void update(Term term) {
-      mTermDAO.update(term);
+        databaseExecutor.execute(()->{
+            mTermDAO.update(term);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void update(Course course) {
-        mCourseDAO.update(course);
+        databaseExecutor.execute(()->{
+            mCourseDAO.update(course);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    /*public List<Course> getCoursesByTermID(int termID) {
-            // this nee
-    }*/
 }

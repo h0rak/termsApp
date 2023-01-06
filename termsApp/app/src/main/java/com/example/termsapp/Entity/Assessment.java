@@ -1,5 +1,6 @@
 package com.example.termsapp.Entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -55,6 +56,18 @@ public class Assessment {
         this.assessmentEnd = assessmentEnd;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                "assessmentID=" + assessmentID +
+                ", isPerformanceBased=" + isPerformanceBased +
+                ", assessmentStart='" + assessmentStart + '\'' +
+                ", assessmentEnd='" + assessmentEnd + '\'' +
+                ", courseID=" + courseID +
+                '}';
+    }
+
     public int getCourseID() {
         return courseID;
     }
@@ -63,13 +76,4 @@ public class Assessment {
         this.courseID = courseID;
     }
 
-    @Override
-    public String toString() {
-        return "Assessment{" +
-                "assessmentID=" + assessmentID +
-                ", isPerformanceBased=" + isPerformanceBased +
-                ", assessmentStart='" + assessmentStart + '\'' +
-                ", assessmentEnd='" + assessmentEnd + '\'' +
-                '}';
-    }
 }

@@ -18,20 +18,15 @@ public class TermList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // this is the basics
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
-        // this is the basics
-        // adding the table to the screen
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         Repository repository = new Repository(getApplication());
-        // we had to create a repository object to use the method below?
         List<Term> terms = repository.getAllTerms();
-        // we added a class for this
-        final TermAdapter adapter = new TermAdapter(this); // create a final adapter
-        recyclerView.setAdapter(adapter); // set adapter to recycler
+        final TermAdapter termAdapter = new TermAdapter(this); // create a final adapter
+        recyclerView.setAdapter(termAdapter); // set adapter to recycler
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // set layout of recycler
-        adapter.setTerms(terms); // set the items in - using the adapter
+        termAdapter.setTerms(terms); // set the items in - using the adapter
         FloatingActionButton button = findViewById(R.id.floatingActionButton); // floatingActionButton cannot be casted as a regular Button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +59,8 @@ public class TermList extends AppCompatActivity {
                 repository.insert(t3);
                 Term t4 = new Term(4, "Fourth term", "10/01/2022", "03/31/2023");
                 repository.insert(t4);
-                Term t6 = new Term(6,"Sixth Term", "01/01/2023", "06/31/2023");
-                repository.insert(t6);
+                Term t5 = new Term(5,"Fifth Term", "01/01/2023", "06/31/2023");
+                repository.insert(t5);
                 List<Term> allTerms = repository.getAllTerms();
                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
                 final TermAdapter adapter = new TermAdapter(this);
@@ -77,10 +72,17 @@ public class TermList extends AppCompatActivity {
         return super.onOptionsItemSelected(menuItem);
     }
 
-    public void expandToTermDetail(View view){
-        Intent intent = new Intent(TermList.this, TermDetailCourseList.class);
-        startActivity(intent);
-    }
+    @Override
+    protected void onResume() {
 
+        super.onResume();
+        Repository repository = new Repository(getApplication());
+        List<Term> allTerms = repository.getAllTerms();
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final TermAdapter termAdapter = new TermAdapter(this);
+        recyclerView.setAdapter(termAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        termAdapter.setTerms(allTerms);
+    }
 
 }

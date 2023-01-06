@@ -15,7 +15,7 @@
         <receiver
             android:name=".UI.MyReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity
             android:name=".UI.AssessmentDetail"

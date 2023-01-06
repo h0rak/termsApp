@@ -12,7 +12,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_detail);
+        setContentView(R.layout.activity_course_detail_assessment_list);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,6 +1,7 @@
 package com.example.termsapp.UI;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,23 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         private CourseViewHolder(@NonNull View itemView) {
             super(itemView);
             courseItemView = itemView.findViewById(R.id.textView2);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    final Course current = mCourses.get(position);
+                    Intent intent = new Intent(context, CourseDetailAssessmentList.class);
+                    intent.putExtra("id", current.getCourseID()); // id name start end iname iphone iemail termid
+                    intent.putExtra("name", current.getCourseName());
+                    intent.putExtra("start", current.getCourseStart());
+                    intent.putExtra("end", current.getCourseEnd());
+                    intent.putExtra("instructorName", current.getInstructorName());
+                    intent.putExtra("instructorPhone", current.getInstructorPhone());
+                    intent.putExtra("instructorEmail", current.getInstructorEmail());
+                    intent.putExtra("termID", current.getTermID());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
@@ -47,6 +65,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         }
         else {
             holder.courseItemView.setText("No Term Name");
+            notifyDataSetChanged();
         }
     }
 

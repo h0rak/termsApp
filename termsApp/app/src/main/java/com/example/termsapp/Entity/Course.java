@@ -1,5 +1,6 @@
 package com.example.termsapp.Entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -95,6 +96,7 @@ public class Course {
         this.termID = termID;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Course{" +
@@ -105,6 +107,7 @@ public class Course {
                 ", instructorName='" + instructorName + '\'' +
                 ", instructorPhone='" + instructorPhone + '\'' +
                 ", instructorEmail='" + instructorEmail + '\'' +
+                ", termID=" + termID +
                 '}';
     }
 }
