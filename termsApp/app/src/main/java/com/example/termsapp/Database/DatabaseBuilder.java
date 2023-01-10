@@ -12,7 +12,7 @@ import com.example.termsapp.Entity.Assessment;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
 
-@Database(entities = {Term.class, Course.class, Assessment.class}, version = 6, exportSchema = false)
+@Database(entities = {Term.class, Course.class, Assessment.class}, version = 7, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract TermDAO termDAO();

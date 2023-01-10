@@ -1,10 +1,7 @@
 package com.example.termsapp.Entity;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.util.List;
 
 @Entity(tableName = "Courses")
 public class Course {
@@ -13,19 +10,23 @@ public class Course {
     private String courseName;
     private String courseStart;
     private String courseEnd;
+    private String courseStatus;
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
+    private String optionalNote;
     private int termID;
 
-    public Course(int courseID, String courseName, String courseStart, String courseEnd, String instructorName, String instructorPhone, String instructorEmail, int termID) {
+    public Course(int courseID, String courseName, String courseStart, String courseEnd, String courseStatus, String instructorName, String instructorPhone, String instructorEmail, String optionalNote, int termID) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseStart = courseStart;
         this.courseEnd = courseEnd;
+        this.courseStatus = courseStatus;
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
+        this.optionalNote = optionalNote;
         this.termID = termID;
     }
 
@@ -60,6 +61,14 @@ public class Course {
         return courseEnd;
     }
 
+    public String getCourseStatus() {
+        return courseStatus;
+    }
+
+    public void setCourseStatus(String courseStatus) {
+        this.courseStatus = courseStatus;
+    }
+
     public void setCourseEnd(String courseEnd) {
         this.courseEnd = courseEnd;
     }
@@ -88,6 +97,14 @@ public class Course {
         this.instructorEmail = instructorEmail;
     }
 
+    public String getOptionalNote() {
+        return optionalNote;
+    }
+
+    public void setOptionalNote(String optionalNote) {
+        this.optionalNote = optionalNote;
+    }
+
     public int getTermID() {
         return termID;
     }
@@ -96,7 +113,6 @@ public class Course {
         this.termID = termID;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Course{" +
@@ -104,9 +120,11 @@ public class Course {
                 ", courseName='" + courseName + '\'' +
                 ", courseStart='" + courseStart + '\'' +
                 ", courseEnd='" + courseEnd + '\'' +
+                ", courseStatus='" + courseStatus + '\'' +
                 ", instructorName='" + instructorName + '\'' +
                 ", instructorPhone='" + instructorPhone + '\'' +
                 ", instructorEmail='" + instructorEmail + '\'' +
+                ", optionalNote='" + optionalNote + '\'' +
                 ", termID=" + termID +
                 '}';
     }

@@ -20,6 +20,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public CourseAdapter(Context context){
         mInflator = LayoutInflater.from(context);
         this.context = context;
+
     }
 
     class CourseViewHolder extends RecyclerView.ViewHolder{
@@ -35,14 +36,16 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     int position = getAdapterPosition();
                     final Course current = mCourses.get(position);
                     Intent intent = new Intent(context, CourseDetailAssessmentList.class);
-                    intent.putExtra("id", current.getCourseID()); // id name start end iname iphone iemail termid
+                    intent.putExtra("id", current.getCourseID()); // id name start end status iname iphone iemail oNote termid
                     intent.putExtra("name", current.getCourseName());
                     intent.putExtra("start", current.getCourseStart());
                     intent.putExtra("end", current.getCourseEnd());
-                    intent.putExtra("instructorName", current.getInstructorName());
-                    intent.putExtra("instructorPhone", current.getInstructorPhone());
-                    intent.putExtra("instructorEmail", current.getInstructorEmail());
-                    intent.putExtra("termID", current.getTermID());
+                    intent.putExtra("status", current.getCourseStatus());
+                    intent.putExtra("iName", current.getInstructorName());
+                    intent.putExtra("iPhone", current.getInstructorPhone());
+                    intent.putExtra("iEmail", current.getInstructorEmail());
+                    intent.putExtra("oNote", current.getOptionalNote());
+                    intent.putExtra("tID", current.getTermID());
                     context.startActivity(intent);
                 }
             });
@@ -61,6 +64,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         if (mCourses!=null){
             Course current = mCourses.get(position);
             String name = current.getCourseName();
+            int termID = current.getTermID();
             holder.courseItemView.setText(name);
         }
         else {
