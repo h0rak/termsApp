@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.R;
+
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
@@ -17,13 +20,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     private List<Course> mCourses;
     private final Context context;
     private final LayoutInflater mInflator;
-    public CourseAdapter(Context context){
+
+    public CourseAdapter(Context context) {
         mInflator = LayoutInflater.from(context);
         this.context = context;
 
     }
 
-    class CourseViewHolder extends RecyclerView.ViewHolder{
+    class CourseViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView courseItemView;
 
@@ -61,13 +65,12 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        if (mCourses!=null){
+        if (mCourses != null) {
             Course current = mCourses.get(position);
             String name = current.getCourseName();
-            int termID = current.getTermID();
+//            int termID = current.getTermID();
             holder.courseItemView.setText(name);
-        }
-        else {
+        } else {
             holder.courseItemView.setText("No Term Name");
             notifyDataSetChanged();
         }
@@ -78,7 +81,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return mCourses.size();
     }
 
-    public void setCourses(List<Course> courses){
+    public void setCourses(List<Course> courses) {
         mCourses = courses;
         notifyDataSetChanged();
     }

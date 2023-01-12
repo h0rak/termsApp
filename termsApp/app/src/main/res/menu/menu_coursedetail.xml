@@ -3,8 +3,8 @@
 
     <item
         android:title="Save Course"
-        android:id="@+id/saveCourse"/>
+        android:id="@+id/saveCourse" />
     <item
         android:title="Delete Course"
-        android:id="@+id/deleteCourse"/>
+        android:id="@+id/deleteCourse" />
 </menu>

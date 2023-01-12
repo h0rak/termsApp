@@ -8,17 +8,28 @@ import androidx.room.PrimaryKey;
 public class Assessment {
     @PrimaryKey(autoGenerate = true)
     private int assessmentID;
-    private Boolean isPerformanceBased;
+    private String assessmentType;
     private String assessmentStart;
     private String assessmentEnd;
     private int courseID;
 
-    public Assessment(int assessmentID, Boolean isPerformanceBased, String assessmentStart, String assessmentEnd, int courseID) {
+    public Assessment(int assessmentID, String assessmentType, String assessmentStart, String assessmentEnd, int courseID) {
         this.assessmentID = assessmentID;
-        this.isPerformanceBased = isPerformanceBased;
+        this.assessmentType = assessmentType;
         this.assessmentStart = assessmentStart;
         this.assessmentEnd = assessmentEnd;
         this.courseID = courseID;
+    }
+
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                "assessmentID=" + assessmentID +
+                ", assessmentType='" + assessmentType + '\'' +
+                ", assessmentStart='" + assessmentStart + '\'' +
+                ", assessmentEnd='" + assessmentEnd + '\'' +
+                ", courseID=" + courseID +
+                '}';
     }
 
     public Assessment() {
@@ -32,12 +43,12 @@ public class Assessment {
         this.assessmentID = assessmentID;
     }
 
-    public Boolean getPerformanceBased() {
-        return isPerformanceBased;
+    public String getAssessmentType() {
+        return assessmentType;
     }
 
-    public void setPerformanceBased(Boolean performanceBased) {
-        isPerformanceBased = performanceBased;
+    public void setAssessmentType(String assessmentType) {
+        this.assessmentType = assessmentType;
     }
 
     public String getAssessmentStart() {
@@ -54,18 +65,6 @@ public class Assessment {
 
     public void setAssessmentEnd(String assessmentEnd) {
         this.assessmentEnd = assessmentEnd;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "Assessment{" +
-                "assessmentID=" + assessmentID +
-                ", isPerformanceBased=" + isPerformanceBased +
-                ", assessmentStart='" + assessmentStart + '\'' +
-                ", assessmentEnd='" + assessmentEnd + '\'' +
-                ", courseID=" + courseID +
-                '}';
     }
 
     public int getCourseID() {

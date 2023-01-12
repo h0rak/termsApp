@@ -2,9 +2,11 @@ package com.example.termsapp.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.example.termsapp.Database.Repository;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -39,27 +42,59 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
     Repository repository;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail_assessment_list);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         cID = getIntent().getIntExtra("id", -1);
+
+        cNameEdit = findViewById(R.id.courseTitleEditText);
         cName = getIntent().getStringExtra("name");
+        cNameEdit.setText(cName);
+
+        cStartEdit = findViewById(R.id.courseStartEditText);
         cStart = getIntent().getStringExtra("start");
+        cStartEdit.setText(cStart);
+
+        cEndEdit = findViewById(R.id.courseEndEditText);
         cEnd = getIntent().getStringExtra("end");
+        cEndEdit.setText(cEnd);
+
         cStatusSpinner = findViewById(R.id.courseStatusSpinner);
-        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this,R.array.status_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.status_array, android.R.layout.simple_spinner_item);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         cStatusSpinner.setAdapter(statusAdapter);
         cStatusSpinner.setSelection(0);
         cStatus = cStatusSpinner.getSelectedItem().toString();
+
+        iNameEdit = findViewById(R.id.courseInstNameEditText);
         iName = getIntent().getStringExtra("iName");
+        iNameEdit.setText(iName);
+
+        iPhoneEdit = findViewById(R.id.courseInstPhoneEditText);
         iPhone = getIntent().getStringExtra("iPhone");
+        iPhoneEdit.setText(iPhone);
+
+        iEmailEdit = findViewById(R.id.courseInstEmailEditText);
         iEmail = getIntent().getStringExtra("iEmail");
+        iEmailEdit.setText(iEmail);
+
+        oNoteEdit = findViewById(R.id.courseNoteEditText);
         oNote = getIntent().getStringExtra("oNote");
-        tID = getIntent().getIntExtra("tID", -1);
+        oNoteEdit.setText(oNote);
+
+        tID = getIntent().getIntExtra("termID", -1);
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton3);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CourseDetailAssessmentList.this, AssessmentDetail.class);
+                intent.putExtra("cID", cID);
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,8 +102,8 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
@@ -81,12 +116,11 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                         cID = 1;
                     else
                         cID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatus, iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
+                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
                     repository.insert(course);
                     Toast.makeText(this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatus, iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
+                } else {
+                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
                     repository.update(course);
                     Toast.makeText(this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
                 }

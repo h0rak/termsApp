@@ -3,8 +3,8 @@
 
     <item
         android:title="Save Assessment"
-        android:id="@+id/saveAssessment"/>
+        android:id="@+id/saveAssessment" />
     <item
         android:title="Delete Assessment"
-        android:id="@+id/deleteAssessment"/>
+        android:id="@+id/deleteAssessment" />
 </menu>

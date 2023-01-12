@@ -10,7 +10,7 @@ import com.example.termsapp.R;
 
 public class MyReceiver extends BroadcastReceiver {
 
-    String channel_id="test";
+    String channel_id = "test";
     static int notificationID;
 
 
@@ -22,7 +22,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     }
 
-    private void createNotificationChannel(Context context, String CHANNEL_ID){
+    private void createNotificationChannel(Context context, String CHANNEL_ID) {
         CharSequence name = context.getResources().getString(R.string.channel_name);
         String description = context.getString(R.string.channel_description);
         int importance = NotificationManager.IMPORTANCE_DEFAULT;

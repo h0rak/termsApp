@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.termsapp.Entity.Term;
 import com.example.termsapp.R;
+
 import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
@@ -18,15 +20,17 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     private List<Term> mTerms;
     private final Context context;
     private final LayoutInflater mInflator;
-    public TermAdapter(Context context){
+
+    public TermAdapter(Context context) {
         mInflator = LayoutInflater.from(context);
         this.context = context;
     }
 
-    class TermViewHolder extends RecyclerView.ViewHolder{
+    class TermViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView termItemView;
-        private TermViewHolder(View itemView){ // testing ADDED params
+
+        private TermViewHolder(View itemView) { // testing ADDED params
             super(itemView);
             termItemView = itemView.findViewById(R.id.textView1);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,18 +58,17 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TermAdapter.TermViewHolder holder, int position) {
-        if (mTerms!=null){
+        if (mTerms != null) {
             Term current = mTerms.get(position);
             String name = current.getTermName();
             holder.termItemView.setText(name);
-        }
-        else {
+        } else {
             holder.termItemView.setText("No Term Name");
         }
     }
 
-    public void setTerms(List<Term> terms){
-        mTerms=terms;
+    public void setTerms(List<Term> terms) {
+        mTerms = terms;
         notifyDataSetChanged();
     }
 
