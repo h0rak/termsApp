@@ -1,6 +1,8 @@
 package com.example.termsapp.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,11 +15,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.termsapp.Database.Repository;
+import com.example.termsapp.Entity.Assessment;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CourseDetailAssessmentList extends AppCompatActivity {
 
@@ -47,6 +51,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_detail_assessment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        repository = new Repository(getApplication());
         cID = getIntent().getIntExtra("id", -1);
 
         cNameEdit = findViewById(R.id.courseTitleEditText);
@@ -85,6 +90,16 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         oNoteEdit.setText(oNote);
 
         tID = getIntent().getIntExtra("termID", -1);
+
+        RecyclerView recyclerView = findViewById(R.id.assessmentRecyclerView);
+        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
+        recyclerView.setAdapter(assessmentAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Assessment> filteredAssessments = new ArrayList<>();
+        for (Assessment a : repository.getAllAssessments()) {
+            if (a.getCourseID() == cID) filteredAssessments.add(a);
+        }
+        assessmentAdapter.setAssessments(filteredAssessments);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton3);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

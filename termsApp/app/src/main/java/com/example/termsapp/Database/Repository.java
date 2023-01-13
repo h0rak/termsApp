@@ -90,6 +90,17 @@ public class Repository {
         }
     }
 
+    public void insert(Assessment assessment) {
+        databaseExecutor.execute(() -> {
+            mAssessmentDAO.insert(assessment);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void delete(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.delete(term);
@@ -112,6 +123,17 @@ public class Repository {
         }
     }
 
+    public void delete(Assessment assessment) {
+        databaseExecutor.execute(() -> {
+            mAssessmentDAO.delete(assessment);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void update(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.update(term);
@@ -126,6 +148,17 @@ public class Repository {
     public void update(Course course) {
         databaseExecutor.execute(() -> {
             mCourseDAO.update(course);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(Assessment assessment) {
+        databaseExecutor.execute(() -> {
+            mAssessmentDAO.update(assessment);
         });
         try {
             Thread.sleep(1000);

@@ -40,7 +40,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     int position = getAdapterPosition();
                     final Course current = mCourses.get(position);
                     Intent intent = new Intent(context, CourseDetailAssessmentList.class);
-                    intent.putExtra("id", current.getCourseID()); // id name start end status iname iphone iemail oNote termid
+                    intent.putExtra("id", current.getCourseID());
                     intent.putExtra("name", current.getCourseName());
                     intent.putExtra("start", current.getCourseStart());
                     intent.putExtra("end", current.getCourseEnd());
@@ -71,7 +71,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 //            int termID = current.getTermID();
             holder.courseItemView.setText(name);
         } else {
-            holder.courseItemView.setText("No Term Name");
+            holder.courseItemView.setText("No Course Name");
             notifyDataSetChanged();
         }
     }

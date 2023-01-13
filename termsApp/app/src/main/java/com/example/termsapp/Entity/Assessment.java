@@ -8,28 +8,19 @@ import androidx.room.PrimaryKey;
 public class Assessment {
     @PrimaryKey(autoGenerate = true)
     private int assessmentID;
+    private String assessmentName;
     private String assessmentType;
     private String assessmentStart;
     private String assessmentEnd;
     private int courseID;
 
-    public Assessment(int assessmentID, String assessmentType, String assessmentStart, String assessmentEnd, int courseID) {
+    public Assessment(int assessmentID, String assessmentName, String assessmentType, String assessmentStart, String assessmentEnd, int courseID) {
         this.assessmentID = assessmentID;
+        this.assessmentName = assessmentName;
         this.assessmentType = assessmentType;
         this.assessmentStart = assessmentStart;
         this.assessmentEnd = assessmentEnd;
         this.courseID = courseID;
-    }
-
-    @Override
-    public String toString() {
-        return "Assessment{" +
-                "assessmentID=" + assessmentID +
-                ", assessmentType='" + assessmentType + '\'' +
-                ", assessmentStart='" + assessmentStart + '\'' +
-                ", assessmentEnd='" + assessmentEnd + '\'' +
-                ", courseID=" + courseID +
-                '}';
     }
 
     public Assessment() {
@@ -41,6 +32,14 @@ public class Assessment {
 
     public void setAssessmentID(int assessmentID) {
         this.assessmentID = assessmentID;
+    }
+
+    public String getAssessmentName() {
+        return assessmentName;
+    }
+
+    public void setAssessmentName(String assessmentName) {
+        this.assessmentName = assessmentName;
     }
 
     public String getAssessmentType() {
@@ -73,6 +72,18 @@ public class Assessment {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    @Override
+    public String toString() {
+        return "Assessment{" +
+                "assessmentID=" + assessmentID +
+                ", assessmentName='" + assessmentName + '\'' +
+                ", assessmentType='" + assessmentType + '\'' +
+                ", assessmentStart='" + assessmentStart + '\'' +
+                ", assessmentEnd='" + assessmentEnd + '\'' +
+                ", courseID=" + courseID +
+                '}';
     }
 
 }

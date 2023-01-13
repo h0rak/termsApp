@@ -186,14 +186,29 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/assessmentListLabelTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="Associated Assessments"
+            android:textAlignment="center"
+            />
+
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/assessmentRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:background="@color/white"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:outlineProvider="none">
 
             </androidx.recyclerview.widget.RecyclerView>
         </ScrollView>
