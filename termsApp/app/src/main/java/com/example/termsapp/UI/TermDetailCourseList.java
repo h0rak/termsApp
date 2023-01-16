@@ -41,12 +41,10 @@ public class TermDetailCourseList extends AppCompatActivity {
     Term currentTerm;
     int numCourses;
 
-    // testing for datePicker below
     DatePickerDialog.OnDateSetListener startDate;
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar startCalendar = Calendar.getInstance();
     final Calendar endCalendar = Calendar.getInstance();
-    // testing or datePicker above
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,9 +208,7 @@ public class TermDetailCourseList extends AppCompatActivity {
     protected void onResume() {
 
         super.onResume();
-        // trying below
         repository = new Repository(getApplication());
-        // trying above
         RecyclerView recyclerView = findViewById(R.id.courseRecyclerView);
         final CourseAdapter courseAdapter = new CourseAdapter(this);
         recyclerView.setAdapter(courseAdapter);

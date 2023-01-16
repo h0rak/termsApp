@@ -80,11 +80,11 @@ public class TermList extends AppCompatActivity {
 
         super.onResume();
         Repository repository = new Repository(getApplication());
-        List<Term> allTerms = repository.getAllTerms();
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         final TermAdapter termAdapter = new TermAdapter(this);
         recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<Term> allTerms = repository.getAllTerms();
         termAdapter.setTerms(allTerms);
     }
 
