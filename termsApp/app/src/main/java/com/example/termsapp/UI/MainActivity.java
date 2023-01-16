@@ -7,12 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.termsapp.Database.Repository;
-import com.example.termsapp.Entity.Course;
-import com.example.termsapp.Entity.Term;
 import com.example.termsapp.R;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
