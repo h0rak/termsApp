@@ -184,7 +184,7 @@ public class TermDetailCourseList extends AppCompatActivity {
                     repository.delete(currentTerm);
                     Toast.makeText(TermDetailCourseList.this, currentTerm.getTermName() + " was deleted", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(TermDetailCourseList.this, "Can't delete a term with courses", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TermDetailCourseList.this, "Can't delete a term with course(s)", Toast.LENGTH_LONG).show();
                 }
                 this.finish(); // do this go here? testing for save
                 return true;

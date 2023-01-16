@@ -208,6 +208,13 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                 return true;
 
             case R.id.deleteCourse:
+                for (Course c : repository.getAllCourses()) {
+                    if (c.getCourseID() == cID) {
+                        repository.delete(c);
+                        Toast.makeText(CourseDetailAssessmentList.this, c.getCourseName() + " was deleted", Toast.LENGTH_LONG).show();
+                    }
+                }
+                this.finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);

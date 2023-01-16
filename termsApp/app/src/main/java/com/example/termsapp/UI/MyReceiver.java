@@ -1,10 +1,13 @@
 package com.example.termsapp.UI;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import androidx.core.app.NotificationCompat;
 
 import com.example.termsapp.R;
 
@@ -19,7 +22,11 @@ public class MyReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
         // throw new UnsupportedOperationException("Not yet implemented");
-
+        createNotificationChannel(context, channel_id);
+        Notification n = new Notification.Builder(context, channel_id)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentText(intent.getStringExtra("idk"))
+                .setContentTitle("test").build();
     }
 
     private void createNotificationChannel(Context context, String CHANNEL_ID) {

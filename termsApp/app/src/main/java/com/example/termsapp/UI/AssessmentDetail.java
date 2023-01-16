@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.termsapp.Database.Repository;
 import com.example.termsapp.Entity.Assessment;
+import com.example.termsapp.Entity.Course;
 import com.example.termsapp.R;
 
 import java.text.ParseException;
@@ -162,7 +163,14 @@ public class AssessmentDetail extends AppCompatActivity {
                 return true;
 
             case R.id.deleteAssessment:
-                // delete
+                for (Assessment a : repository.getAllAssessments()) {
+                    if (a.getAssessmentID() == aID) {
+                        repository.delete(a);
+                        Toast.makeText(AssessmentDetail.this, a.getAssessmentName() + " was deleted", Toast.LENGTH_LONG).show();
+                    }
+                }
+                this.finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
