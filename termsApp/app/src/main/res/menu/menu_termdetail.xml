@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/saveTerm"
-        android:title="Save Term" />
+        android:title="@string/save_term" />
     <item
         android:id="@+id/deleteTerm"
-        android:title="Delete Term" />
+        android:title="@string/delete_term" />
 </menu>

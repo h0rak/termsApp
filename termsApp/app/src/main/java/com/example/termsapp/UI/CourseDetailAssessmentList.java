@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -77,11 +80,22 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
 
         cStartEdit = findViewById(R.id.courseStartEditText);
         cStart = getIntent().getStringExtra("start");
-        cStartEdit.setText(cStart);
+        if (cStart == null) {
+            cStartEdit.setText(sdf.format(new Date()));
+        }
+        else {
+            cStartEdit.setText(cStart);
+        }
 
         cEndEdit = findViewById(R.id.courseEndEditText);
         cEnd = getIntent().getStringExtra("end");
         cEndEdit.setText(cEnd);
+        if (cEnd == null) {
+            cEndEdit.setText(sdf.format(new Date()));
+        }
+        else {
+            cEndEdit.setText(cEnd);
+        }
 
         cStartEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +230,55 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                 }
                 this.finish();
                 return true;
+
+            case R.id.share_course:
+                Intent intent1 = new Intent();
+                intent1.setAction(Intent.ACTION_SEND);
+                intent1.putExtra(Intent.EXTRA_TEXT, oNoteEdit.getText().toString());
+                intent1.putExtra(Intent.EXTRA_TITLE, "Choose Course Sharing Option");
+                intent1.setType("text/plain");
+                Intent intent2 = Intent.createChooser(intent1, null);
+                startActivity(intent2);
+                return true;
+
+            case R.id.notify_start_course:
+                String date = cStartEdit.getText().toString();
+                String name = cNameEdit.getText().toString();
+                String format = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                Date myDate = null;
+                try {
+                    myDate = sdf.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long trigger = myDate.getTime();
+                Intent intent = new Intent(CourseDetailAssessmentList.this, MyReceiver.class);
+                intent.putExtra("notification", date + " " + name + " begins");
+                PendingIntent sender = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+
+            case R.id.notify_end_course:
+                date = cStartEdit.getText().toString();
+                name = cNameEdit.getText().toString();
+                format = "MM/dd/yy";
+                sdf = new SimpleDateFormat(format, Locale.US);
+                myDate = null;
+                try {
+                    myDate = sdf.parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                trigger = myDate.getTime();
+                intent = new Intent(CourseDetailAssessmentList.this, MyReceiver.class);
+                intent.putExtra("notification", date + " " + name + " ends");
+                sender = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
+                alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

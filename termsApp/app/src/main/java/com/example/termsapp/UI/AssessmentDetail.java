@@ -62,19 +62,29 @@ public class AssessmentDetail extends AppCompatActivity {
         aTypeSpinner.setSelection(0);
         aType = aTypeSpinner.getSelectedItem().toString();
 
-        aStartEdit = findViewById(R.id.assessmentStartEditText);
-        aStart = getIntent().getStringExtra("aStart");
-        aStartEdit.setText(aStart);
-
-        aEndEdit = findViewById(R.id.assessmentEndEditText);
-        aEnd = getIntent().getStringExtra("aEnd");
-        aEndEdit.setText(aEnd);
-
         // testing for datePicker below
         String dateFormat = "MM/dd/yy";
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
         String currentDate = sdf.format(new Date());
         // testing or datePicker above
+
+        aStartEdit = findViewById(R.id.assessmentStartEditText);
+        aStart = getIntent().getStringExtra("aStart");
+        if (aStart == null) {
+            aStartEdit.setText(sdf.format(new Date()));
+        }
+        else {
+            aStartEdit.setText(aStart);
+        }
+
+        aEndEdit = findViewById(R.id.assessmentEndEditText);
+        aEnd = getIntent().getStringExtra("aEnd");
+        if (aEnd == null) {
+            aEndEdit.setText(sdf.format(new Date()));
+        } else
+            aEndEdit.setText(aEnd);
+
+
 
         aStartEdit.setOnClickListener(new View.OnClickListener() {
             @Override

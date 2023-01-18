@@ -2,9 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Save Assessment"
+        android:title="@string/save_assessment"
         android:id="@+id/saveAssessment" />
     <item
-        android:title="Delete Assessment"
+        android:title="@string/delete_assessment"
         android:id="@+id/deleteAssessment" />
+    <item
+        android:id="@+id/share_assessment"
+        android:title="@string/share" />
+    <item
+        android:id="@+id/notify_start_assessment"
+        android:title="@string/notify_start" />
+    <item
+        android:id="@+id/notify_end_assessment"
+        android:title="@string/notify_end" />
 </menu>

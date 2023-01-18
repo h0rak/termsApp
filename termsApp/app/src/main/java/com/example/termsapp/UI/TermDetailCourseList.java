@@ -65,11 +65,22 @@ public class TermDetailCourseList extends AppCompatActivity {
 
         editStart = findViewById(R.id.termStartEditText);
         start = getIntent().getStringExtra("start");
-        editStart.setText(start);
+        if (start == null) {
+            editStart.setText(sdf.format(new Date()));
+        }
+        else {
+            editStart.setText(start);
+
+        }
 
         editEnd = findViewById(R.id.termEndEditText);
         end = getIntent().getStringExtra("end");
-        editEnd.setText(end);
+        if (end == null) {
+            editEnd.setText(sdf.format(new Date()));
+        }
+        else {
+            editEnd.setText(end);
+        }
 
         editStart.setOnClickListener(new View.OnClickListener() {
             @Override
