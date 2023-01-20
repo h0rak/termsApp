@@ -2,7 +2,11 @@ package com.example.termsapp.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -180,6 +184,44 @@ public class AssessmentDetail extends AppCompatActivity {
                     }
                 }
                 this.finish();
+                return true;
+
+            case R.id.notify_start_assessment:
+                String startDate = aStartEdit.getText().toString();
+                String startName = aNameEdit.getText().toString();
+                String format = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                Date myStartDate = null;
+                try {
+                    myStartDate = sdf.parse(startDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long triggerStart = myStartDate.getTime();
+                Intent intent3 = new Intent(AssessmentDetail.this, MyReceiver.class);
+                intent3.putExtra("notification", startDate + " " + startName + " begins");
+                PendingIntent sender1 = PendingIntent.getBroadcast(AssessmentDetail.this, ++MainActivity.numAlert, intent3, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager1 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager1.set(AlarmManager.RTC_WAKEUP, triggerStart, sender1);
+                return true;
+
+            case R.id.notify_end_assessment:
+                String endDate = aEndEdit.getText().toString();
+                String endName = aNameEdit.getText().toString();
+                format = "MM/dd/yy";
+                sdf = new SimpleDateFormat(format, Locale.US);
+                Date myEndDate = null;
+                try {
+                    myEndDate = sdf.parse(endDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long endTrigger = myEndDate.getTime();
+                Intent intent4 = new Intent(AssessmentDetail.this, MyReceiver.class);
+                intent4.putExtra("notification", endDate + " " + endName + " ends");
+                PendingIntent sender2 = PendingIntent.getBroadcast(AssessmentDetail.this, ++MainActivity.numAlert, intent4, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager2.set(AlarmManager.RTC_WAKEUP, endTrigger, sender2);
                 return true;
         }
         return super.onOptionsItemSelected(item);

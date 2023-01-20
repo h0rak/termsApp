@@ -257,20 +257,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                 intent3.putExtra("notification", startDate + " " + startName + " begins");
                 PendingIntent sender1 = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent3, PendingIntent.FLAG_IMMUTABLE);
                 AlarmManager alarmManager1 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                // test below
-                String today = sdf.format(new Date());
-                Date todayDate = null;
-                try {
-                    todayDate = sdf.parse(today);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                long todayInMils = todayDate.getTime();
-                if (todayInMils == triggerStart) {
-                    alarmManager1.set(AlarmManager.RTC_WAKEUP, triggerStart, sender1);
-
-                }
-                // test above
+                alarmManager1.set(AlarmManager.RTC_WAKEUP, triggerStart, sender1);
                 return true;
 
             case R.id.notify_end_course:
