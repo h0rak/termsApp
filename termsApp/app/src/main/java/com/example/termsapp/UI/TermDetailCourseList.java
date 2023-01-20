@@ -51,10 +51,10 @@ public class TermDetailCourseList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_detail_course_ilst);
 
-        termID = getIntent().getIntExtra("id", -1);
+        termID = getIntent().getIntExtra("t_tID", -1);
 
         editName = findViewById(R.id.termNameEditText);
-        name = getIntent().getStringExtra("name");
+        name = getIntent().getStringExtra("t_name");
         editName.setText(name);
 
         // testing for datePicker below
@@ -64,7 +64,7 @@ public class TermDetailCourseList extends AppCompatActivity {
         // testing or datePicker above
 
         editStart = findViewById(R.id.termStartEditText);
-        start = getIntent().getStringExtra("start");
+        start = getIntent().getStringExtra("t_start");
         if (start == null) {
             editStart.setText(sdf.format(new Date()));
         }
@@ -74,7 +74,7 @@ public class TermDetailCourseList extends AppCompatActivity {
         }
 
         editEnd = findViewById(R.id.termEndEditText);
-        end = getIntent().getStringExtra("end");
+        end = getIntent().getStringExtra("t_end");
         if (end == null) {
             editEnd.setText(sdf.format(new Date()));
         }
@@ -175,7 +175,7 @@ public class TermDetailCourseList extends AppCompatActivity {
                     repository.insert(term);
                     Toast.makeText(this, "Term Saved Successfully", Toast.LENGTH_LONG).show();
                 } else {
-                    term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
+                    term = new Term(getIntent().getIntExtra("t_tID", -1), editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
                     repository.update(term);
                     Toast.makeText(this, "Term Updated Successfully", Toast.LENGTH_LONG).show();
                 }

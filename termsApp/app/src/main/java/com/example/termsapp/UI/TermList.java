@@ -19,6 +19,9 @@ import java.util.List;
 
 public class TermList extends AppCompatActivity {
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,7 @@ public class TermList extends AppCompatActivity {
         recyclerView.setAdapter(termAdapter); // set adapter to recycler
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // set layout of recycler
         termAdapter.setTerms(terms); // set the items in - using the adapter
+
         FloatingActionButton button = findViewById(R.id.floatingActionButton); // floatingActionButton cannot be casted as a regular Button
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +58,7 @@ public class TermList extends AppCompatActivity {
 
             case R.id.addSampleTerms:
                 Repository repository = new Repository(getApplication());
-                Term t1 = new Term(1, "First Term", "04/01/21", "09/31/21");
+                Term t1 = new Term(1, "First Term", "04/01/21", "09/31/ 21");
                 repository.insert(t1);
                 Term t2 = new Term(2, "Second Term", "10/01/21", "03/31/22");
                 repository.insert(t2);
@@ -74,6 +78,8 @@ public class TermList extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menuItem);
     }
+
+
 
     @Override
     protected void onResume() {

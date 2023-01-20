@@ -17,11 +17,10 @@ public class MyReceiver extends BroadcastReceiver {
     String channel_id = "test";
     static int notificationID;
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
         createNotificationChannel(context, channel_id);
-        Notification n = new Notification.Builder(context, channel_id)
+        Notification n = new NotificationCompat.Builder(context, channel_id)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentText(intent.getStringExtra("notification"))
                 .setContentTitle("University of Moon").build();

@@ -214,7 +214,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                     repository.insert(course);
                     Toast.makeText(this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
                 } else {
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
+                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), getIntent().getIntExtra("tID", -1));
                     repository.update(course);
                     Toast.makeText(this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
                 }
@@ -242,41 +242,54 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                 return true;
 
             case R.id.notify_start_course:
-                String date = cStartEdit.getText().toString();
-                String name = cNameEdit.getText().toString();
+                String startDate = cStartEdit.getText().toString();
+                String startName = cNameEdit.getText().toString();
                 String format = "MM/dd/yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
-                Date myDate = null;
+                Date myStartDate = null;
                 try {
-                    myDate = sdf.parse(date);
+                    myStartDate = sdf.parse(startDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                long trigger = myDate.getTime();
-                Intent intent = new Intent(CourseDetailAssessmentList.this, MyReceiver.class);
-                intent.putExtra("notification", date + " " + name + " begins");
-                PendingIntent sender = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
-                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                long triggerStart = myStartDate.getTime();
+                Intent intent3 = new Intent(CourseDetailAssessmentList.this, MyReceiver.class);
+                intent3.putExtra("notification", startDate + " " + startName + " begins");
+                PendingIntent sender1 = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent3, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager1 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                // test below
+                String today = sdf.format(new Date());
+                Date todayDate = null;
+                try {
+                    todayDate = sdf.parse(today);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long todayInMils = todayDate.getTime();
+                if (todayInMils == triggerStart) {
+                    alarmManager1.set(AlarmManager.RTC_WAKEUP, triggerStart, sender1);
+
+                }
+                // test above
                 return true;
 
             case R.id.notify_end_course:
-                date = cStartEdit.getText().toString();
-                name = cNameEdit.getText().toString();
+                String endDate = cEndEdit.getText().toString();
+                String endName = cNameEdit.getText().toString();
                 format = "MM/dd/yy";
                 sdf = new SimpleDateFormat(format, Locale.US);
-                myDate = null;
+                Date myEndDate = null;
                 try {
-                    myDate = sdf.parse(date);
+                    myEndDate = sdf.parse(endDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                trigger = myDate.getTime();
-                intent = new Intent(CourseDetailAssessmentList.this, MyReceiver.class);
-                intent.putExtra("notification", date + " " + name + " ends");
-                sender = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent, PendingIntent.FLAG_IMMUTABLE);
-                alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                long endTrigger = myEndDate.getTime();
+                Intent intent4 = new Intent(CourseDetailAssessmentList.this, MyReceiver.class);
+                intent4.putExtra("notification", endDate + " " + endName + " ends");
+                PendingIntent sender2 = PendingIntent.getBroadcast(CourseDetailAssessmentList.this, ++MainActivity.numAlert, intent4, PendingIntent.FLAG_IMMUTABLE);
+                AlarmManager alarmManager2 = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager2.set(AlarmManager.RTC_WAKEUP, endTrigger, sender2);
                 return true;
 
         }

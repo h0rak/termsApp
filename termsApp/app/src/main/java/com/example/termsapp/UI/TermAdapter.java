@@ -39,10 +39,10 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     int position = getAdapterPosition();
                     final Term current = mTerms.get(position);
                     Intent intent = new Intent(context, TermDetailCourseList.class); // course.class was the mistake here
-                    intent.putExtra("id", current.getTermID()); // these bridge term list to term detail list?
-                    intent.putExtra("name", current.getTermName());
-                    intent.putExtra("start", current.getTermStart());
-                    intent.putExtra("end", current.getTermEnd());
+                    intent.putExtra("t_tID", current.getTermID()); // these bridge term list to term detail list?
+                    intent.putExtra("t_name", current.getTermName());
+                    intent.putExtra("t_start", current.getTermStart());
+                    intent.putExtra("t_end", current.getTermEnd());
                     context.startActivity(intent);
                 }
             });

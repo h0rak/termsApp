@@ -20,89 +20,87 @@
         tools:layout_editor_absoluteX="339dp"
         tools:layout_editor_absoluteY="659dp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/termNameTextView"
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Term Name: " />
-
-            <EditText
-                android:id="@+id/termNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/termStartTextView"
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Start Date: " />
-
-            <EditText
-                android:id="@+id/termStartEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/termEndTextView"
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="End Date: " />
-
-            <EditText
-                android:id="@+id/termEndEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/courseListLabelTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:text="Associated Courses"
-            android:textAlignment="center"
-            />
+            android:orientation="vertical">
 
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="478dp"
-            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/termNameTextView"
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Term Name: " />
+
+                <EditText
+                    android:id="@+id/termNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/termStartTextView"
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Start Date: " />
+
+                <EditText
+                    android:id="@+id/termStartEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/termEndTextView"
+                    android:layout_width="400dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="End Date: " />
+
+                <EditText
+                    android:id="@+id/termEndEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/courseListLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Associated Courses"
+                android:textAlignment="center"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/courseRecyclerView"
@@ -113,9 +111,11 @@
                 android:clipChildren="false"
                 android:clipToPadding="false"
                 android:outlineProvider="none" />
-        </ScrollView>
 
-    </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
