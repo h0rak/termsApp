@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SpinnerDemo</string>
+    <string-array name="dogs_array">
+        <item>beagle</item>
+        <item>golden retriever</item>
+        <item>poodle</item>
+    </string-array>
+</resources>

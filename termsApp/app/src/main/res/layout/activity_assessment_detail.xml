@@ -22,7 +22,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Assessment Title: " />
+                android:text="@string/assessment_title" />
 
             <EditText
                 android:id="@+id/assessmentTitleEditText"
@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Assessment Type: " />
+                android:text="@string/assessment_type" />
 
             <Spinner
                 android:id="@+id/assessmentTypeSpinner"
@@ -62,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Assessment Start: " />
+                android:text="@string/assessment_start" />
 
             <EditText
                 android:id="@+id/assessmentStartEditText"
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Assessment End: " />
+                android:text="@string/assessment_end" />
 
             <EditText
                 android:id="@+id/assessmentEndEditText"
