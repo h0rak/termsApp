@@ -23,8 +23,8 @@ public class Assessment {
         this.courseID = courseID;
     }
 
-    public Assessment() {
-    }
+    /*public Assessment() {
+    }*/
 
     public int getAssessmentID() {
         return assessmentID;

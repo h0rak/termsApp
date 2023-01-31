@@ -29,8 +29,8 @@ public class Term {
         this.termEnd = termEnd;
     }
 
-    public Term() {
-    }
+    /*public Term() {
+    }*/
 
     public int getTermID() {
         return termID;
