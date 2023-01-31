@@ -30,8 +30,8 @@ public class Course {
         this.termID = termID;
     }
 
-    public Course() {
-    }
+    /*public Course() {
+    }*/
 
     public int getCourseID() {
         return courseID;
