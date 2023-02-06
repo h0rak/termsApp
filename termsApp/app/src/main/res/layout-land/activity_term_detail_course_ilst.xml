@@ -25,15 +25,15 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -54,8 +54,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -78,8 +76,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
+
                 android:orientation="horizontal">
 
                 <TextView
@@ -98,6 +95,15 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/saveTermButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_term"
+                android:layout_weight="1">
+
+            </Button>
+
             <TextView
                 android:id="@+id/courseListLabelTextView"
                 android:layout_width="match_parent"
@@ -107,6 +113,35 @@
                 android:text="@string/associated_courses"
                 android:textAlignment="center"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/searchInput"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:hint="@string/search"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textAlignment="center">
+
+                </EditText>
+
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/searchButton">
+
+                </Button>
+
+            </LinearLayout>
+
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/courseRecyclerView"

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.example.termsapp.Database.Repository;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
+import com.example.termsapp.Entity.User;
 import com.example.termsapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -34,12 +36,16 @@ public class TermDetailCourseList extends AppCompatActivity {
     String name;
     String start;
     String end;
+    int userID;
     EditText editName;
     EditText editStart;
     EditText editEnd;
+    EditText editSearch;
+    Button searchButton;
     Repository repository;
     Term currentTerm;
     int numCourses;
+    Button saveTermButton;
 
     DatePickerDialog.OnDateSetListener startDate;
     DatePickerDialog.OnDateSetListener endDate;
@@ -81,6 +87,9 @@ public class TermDetailCourseList extends AppCompatActivity {
         else {
             editEnd.setText(end);
         }
+
+
+
 
         editStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +162,47 @@ public class TermDetailCourseList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        userID = getIntent().getIntExtra("uID", -1);
+        editSearch = findViewById(R.id.searchInput);
+        searchButton = findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchString = editSearch.getText().toString();
+                List<Course> searchedCourses = new ArrayList<>();
+                for (Course c : repository.getAllCourses()) {
+                    if (c.getCourseName().contains(searchString)) {
+                        searchedCourses.add(c);
+                    }
+                }
+                courseAdapter.setCourses(searchedCourses);
+                recyclerView.setAdapter(courseAdapter);
+            }
+        });
+
+        saveTermButton = findViewById(R.id.saveTermButton);
+
+        saveTermButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Term term;
+                if (termID == -1) {
+                    if (repository.getAllTerms().size() == 0) termID = 1;
+                    else
+                        termID = repository.getAllTerms().get(repository.getAllTerms().size() - 1).getTermID() + 1;
+                    term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(), userID);
+                    repository.insert(term);
+                    Toast.makeText(TermDetailCourseList.this, "Term Saved Successfully", Toast.LENGTH_LONG).show();
+                } else {
+                    term = new Term(getIntent().getIntExtra("t_tID", -1), editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(), userID);
+                    repository.update(term);
+                    Toast.makeText(TermDetailCourseList.this, "Term Updated Successfully", Toast.LENGTH_LONG).show();
+                }
+                TermDetailCourseList.this.finish(); // do this go here? testing for save
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,11 +221,11 @@ public class TermDetailCourseList extends AppCompatActivity {
                     if (repository.getAllTerms().size() == 0) termID = 1;
                     else
                         termID = repository.getAllTerms().get(repository.getAllTerms().size() - 1).getTermID() + 1;
-                    term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
+                    term = new Term(termID, editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(), userID);
                     repository.insert(term);
                     Toast.makeText(this, "Term Saved Successfully", Toast.LENGTH_LONG).show();
                 } else {
-                    term = new Term(getIntent().getIntExtra("t_tID", -1), editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString());
+                    term = new Term(getIntent().getIntExtra("t_tID", -1), editName.getText().toString(), editStart.getText().toString(), editEnd.getText().toString(), userID);
                     repository.update(term);
                     Toast.makeText(this, "Term Updated Successfully", Toast.LENGTH_LONG).show();
                 }

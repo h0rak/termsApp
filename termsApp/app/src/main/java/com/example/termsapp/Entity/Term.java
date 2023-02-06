@@ -21,12 +21,14 @@ public class Term {
     private String termName;
     private String termStart;
     private String termEnd;
+    private int userID;
 
-    public Term(int termID, String termName, String termStart, String termEnd) {
+    public Term(int termID, String termName, String termStart, String termEnd, int userID) {
         this.termID = termID;
         this.termName = termName;
         this.termStart = termStart;
         this.termEnd = termEnd;
+        this.userID = userID;
     }
 
     /*public Term() {
@@ -64,7 +66,14 @@ public class Term {
         this.termEnd = termEnd;
     }
 
-    @NonNull
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
     @Override
     public String toString() {
         return "Term{" +
@@ -72,7 +81,11 @@ public class Term {
                 ", termName='" + termName + '\'' +
                 ", termStart='" + termStart + '\'' +
                 ", termEnd='" + termEnd + '\'' +
+                ", userID=" + userID +
                 '}';
     }
+
+
+
 }
 

@@ -43,6 +43,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     intent.putExtra("t_name", current.getTermName());
                     intent.putExtra("t_start", current.getTermStart());
                     intent.putExtra("t_end", current.getTermEnd());
+                    intent.putExtra("t_uID", current.getUserID());
                     context.startActivity(intent);
                 }
             });

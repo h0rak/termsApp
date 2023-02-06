@@ -90,6 +90,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
         </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_assessment"
+            android:id="@+id/saveAssessmentButton"
+            >
+
+        </Button>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

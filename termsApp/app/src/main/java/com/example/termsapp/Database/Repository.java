@@ -6,9 +6,11 @@ import android.widget.Adapter;
 import com.example.termsapp.DAO.AssessmentDAO;
 import com.example.termsapp.DAO.CourseDAO;
 import com.example.termsapp.DAO.TermDAO;
+import com.example.termsapp.DAO.UserDAO;
 import com.example.termsapp.Entity.Assessment;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
+import com.example.termsapp.Entity.User;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -16,9 +18,11 @@ import java.util.concurrent.Executors;
 
 public class Repository {
 
+    private final UserDAO mUserDAO;
     private final TermDAO mTermDAO;
     private final CourseDAO mCourseDAO;
     private final AssessmentDAO mAssessmentDAO;
+    private List<User> mAllUsers;
     private List<Term> mAllTerms;
     private List<Course> mAllCourses;
     private List<Assessment> mAllAssessments;
@@ -27,9 +31,22 @@ public class Repository {
 
     public Repository(Application application) {
         DatabaseBuilder db = DatabaseBuilder.getDatabase(application);
+        mUserDAO = db.userDAO();
         mTermDAO = db.termDAO();
         mCourseDAO = db.courseDAO();
         mAssessmentDAO = db.assessmentDAO();
+    }
+
+    public List<User> getAllUsers() {
+        databaseExecutor.execute(() -> {
+            mAllUsers = mUserDAO.getAllUsers();
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return mAllUsers;
     }
 
     public List<Term> getAllTerms() {
@@ -68,6 +85,17 @@ public class Repository {
         return mAllAssessments;
     }
 
+    public void insert(User user) {
+        databaseExecutor.execute(() -> {
+            mUserDAO.insert(user);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void insert(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.insert(term);
@@ -101,6 +129,17 @@ public class Repository {
         }
     }
 
+    public void delete(User user) {
+        databaseExecutor.execute(() -> {
+            mUserDAO.delete(user);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void delete(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.delete(term);
@@ -126,6 +165,17 @@ public class Repository {
     public void delete(Assessment assessment) {
         databaseExecutor.execute(() -> {
             mAssessmentDAO.delete(assessment);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(User user) {
+        databaseExecutor.execute(() -> {
+            mUserDAO.update(user);
         });
         try {
             Thread.sleep(1000);

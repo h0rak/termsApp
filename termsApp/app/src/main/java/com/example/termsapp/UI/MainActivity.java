@@ -12,6 +12,7 @@ import com.example.termsapp.R;
 public class MainActivity extends AppCompatActivity {
 
     public static int numAlert;
+    public static boolean matchExists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // NEW WAY
-                Intent intent = new Intent(MainActivity.this, TermList.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

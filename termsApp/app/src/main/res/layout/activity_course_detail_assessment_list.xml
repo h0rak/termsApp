@@ -190,6 +190,15 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/saveCourseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_course"
+                android:layout_weight="1">
+
+            </Button>
+
             <TextView
                 android:id="@+id/assessmentListLabelTextView"
                 android:layout_width="match_parent"

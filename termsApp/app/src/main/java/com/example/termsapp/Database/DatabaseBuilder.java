@@ -9,12 +9,16 @@ import androidx.room.RoomDatabase;
 import com.example.termsapp.DAO.AssessmentDAO;
 import com.example.termsapp.DAO.CourseDAO;
 import com.example.termsapp.DAO.TermDAO;
+import com.example.termsapp.DAO.UserDAO;
 import com.example.termsapp.Entity.Assessment;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
+import com.example.termsapp.Entity.User;
 
-@Database(entities = {Term.class, Course.class, Assessment.class}, version = 10, exportSchema = false)
+@Database(entities = {User.class, Term.class, Course.class, Assessment.class}, version = 11, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
+
+    public abstract UserDAO userDAO();
 
     public abstract TermDAO termDAO();
 

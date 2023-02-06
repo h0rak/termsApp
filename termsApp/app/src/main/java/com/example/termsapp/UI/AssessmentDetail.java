@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -41,6 +42,7 @@ public class AssessmentDetail extends AppCompatActivity {
     EditText aStartEdit;
     EditText aEndEdit;
     Repository repository;
+    Button saveAssessmentButton;
     DatePickerDialog.OnDateSetListener startDate;
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar startCalendar = Calendar.getInstance();
@@ -139,6 +141,34 @@ public class AssessmentDetail extends AppCompatActivity {
         };
 
         cID = getIntent().getIntExtra("cID", -1);
+
+        saveAssessmentButton = findViewById(R.id.saveAssessmentButton);
+
+        saveAssessmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // save
+                Assessment assessment;
+                repository = new Repository(getApplication());
+                if (aID == -1) {
+                    if (repository.getAllAssessments().size() == 0) {
+                        aID = 1;
+                    }
+                    else {
+                        aID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
+                    }
+                    assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
+                    repository.insert(assessment);
+                    Toast.makeText(AssessmentDetail.this, "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
+                    repository.update(assessment);
+                    Toast.makeText(AssessmentDetail.this, "Assessment Updated Successfully", Toast.LENGTH_LONG).show();
+                }
+                AssessmentDetail.this.finish();
+            }
+        });
 
     }
 

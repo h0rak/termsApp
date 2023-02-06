@@ -24,15 +24,18 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="450dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -53,8 +56,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -75,8 +76,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -97,8 +96,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -119,8 +116,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -141,8 +136,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -163,8 +156,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -186,8 +177,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="150dp"
-                android:layout_marginRight="150dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -205,6 +194,15 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/saveCourseButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_course"
+                android:layout_weight="1">
+
+            </Button>
 
             <TextView
                 android:id="@+id/assessmentListLabelTextView"

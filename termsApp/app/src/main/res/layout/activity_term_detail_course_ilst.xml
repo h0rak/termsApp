@@ -40,7 +40,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Term Name: " />
+                    android:text="@string/term_name" />
 
                 <EditText
                     android:id="@+id/termNameEditText"
@@ -60,7 +60,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Start Date: " />
+                    android:text="@string/start_date" />
 
                 <EditText
                     android:id="@+id/termStartEditText"
@@ -82,7 +82,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="End Date: " />
+                    android:text="@string/end_date" />
 
                 <EditText
                     android:id="@+id/termEndEditText"
@@ -92,15 +92,52 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/saveTermButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/save_term"
+                android:layout_weight="1">
+
+            </Button>
+
+
             <TextView
                 android:id="@+id/courseListLabelTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Associated Courses"
+                android:text="@string/associated_courses"
                 android:textAlignment="center"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <EditText
+                    android:id="@+id/searchInput"
+                    android:layout_width="230dp"
+                    android:layout_height="match_parent"
+                    android:hint="@string/search"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textAlignment="center">
+
+                </EditText>
+
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="175dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/searchButton">
+
+                </Button>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/courseRecyclerView"

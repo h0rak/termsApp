@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -54,6 +55,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
     EditText iEmailEdit;
     EditText oNoteEdit;
     Repository repository;
+    Button saveCourseButton;
     DatePickerDialog.OnDateSetListener startDate;
     DatePickerDialog.OnDateSetListener endDate;
     final Calendar startCalendar = Calendar.getInstance();
@@ -169,6 +171,30 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         oNoteEdit.setText(oNote);
 
         tID = getIntent().getIntExtra("termID", -1);
+
+        saveCourseButton = findViewById(R.id.saveCourseButton);
+
+        saveCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Course course;
+                repository = new Repository(getApplication());
+                if (cID == -1) {
+                    if (repository.getAllCourses().size() == 0)
+                        cID = 1;
+                    else
+                        cID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
+                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
+                    repository.insert(course);
+                    Toast.makeText(CourseDetailAssessmentList.this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
+                } else {
+                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), getIntent().getIntExtra("tID", -1));
+                    repository.update(course);
+                    Toast.makeText(CourseDetailAssessmentList.this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
+                }
+                CourseDetailAssessmentList.this.finish();
+            }
+        });
 
         RecyclerView recyclerView = findViewById(R.id.assessmentRecyclerView);
         final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);

@@ -30,6 +30,13 @@
     <string name="assessment_type">Assessment Type:</string>
     <string name="assessment_start">Assessment Start:</string>
     <string name="assessment_end">Assessment End:</string>
+    <string name="username">username:</string>
+    <string name="password">password:</string>
+    <string name="login">LOGIN</string>
+    <string name="clear">CLEAR</string>
+    <string name="enter">Enter</string>
+    <string name="search">search...</string>
+    <string name="searchButton">search</string>
     <string-array name="status_array">
         <item>Plan to Take</item>
         <item>In Progress</item>
