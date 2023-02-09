@@ -28,10 +28,19 @@ public class LoginActivity extends AppCompatActivity {
         passwordEdit = findViewById(R.id.passwordInput);
 
         Repository repository = new Repository(getApplication());
-        User u1 = new User(1, "test", "test");
-        repository.insert(u1);
-        User u2 = new User(2, "admin", "admin");
-        repository.insert(u2);
+        User user1 = new User(1, "test", "test");
+        repository.insert(user1);
+        User user2 = new User(2, "admin", "admin");
+        repository.insert(user2);
+
+        Button signUp = findViewById(R.id.signUp);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, NewUserActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Button clear = findViewById(R.id.clearButton);
         clear.setOnClickListener(new View.OnClickListener() {

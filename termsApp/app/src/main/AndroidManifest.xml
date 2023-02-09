@@ -48,7 +48,7 @@
             android:name=".UI.TermList"
             android:exported="false"
             android:label="Term List"
-            android:parentActivityName=".UI.MainActivity">
+            android:parentActivityName=".UI.LoginActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -58,6 +58,15 @@
             android:exported="false"
             android:label="Term List"
             android:parentActivityName=".UI.MainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".UI.NewUserActivity"
+            android:exported="false"
+            android:label="New User"
+            android:parentActivityName=".UI.LoginActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

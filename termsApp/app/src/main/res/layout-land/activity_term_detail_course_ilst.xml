@@ -48,7 +48,8 @@
                     android:id="@+id/termNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:maxLines="1"/>
             </LinearLayout>
 
             <LinearLayout
@@ -68,7 +69,8 @@
                     android:id="@+id/termStartEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:maxLines="1"/>
 
 
             </LinearLayout>
@@ -91,7 +93,8 @@
                     android:id="@+id/termEndEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:maxLines="1"/>
 
             </LinearLayout>
 
@@ -127,7 +130,8 @@
                     android:hint="@string/search"
                     android:importantForAutofill="no"
                     android:inputType="text"
-                    android:textAlignment="center">
+                    android:textAlignment="center"
+                    android:maxLines="1">
 
                 </EditText>
 

@@ -37,6 +37,9 @@
     <string name="enter">Enter</string>
     <string name="search">search...</string>
     <string name="searchButton">search</string>
+    <string name="need_to_register">Need to register?</string>
+    <string name="sign_up">sign up</string>
+    <string name="save">save</string>
     <string-array name="status_array">
         <item>Plan to Take</item>
         <item>In Progress</item>

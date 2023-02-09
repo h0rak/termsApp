@@ -10,6 +10,7 @@ import androidx.room.Update;
 import com.example.termsapp.Entity.User;
 
 import java.util.List;
+
 @Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)

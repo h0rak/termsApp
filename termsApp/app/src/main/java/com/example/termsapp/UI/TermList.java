@@ -99,8 +99,6 @@ public class TermList extends AppCompatActivity {
         final TermAdapter termAdapter = new TermAdapter(this);
         recyclerView.setAdapter(termAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        /*List<Term> allTerms = repository.getAllTerms();
-        termAdapter.setTerms(allTerms);*/
         List<Term> filteredTerms = new ArrayList<>();
         for (Term t : repository.getAllTerms()) {
             if (t.getUserID() == uID) filteredTerms.add(t);
