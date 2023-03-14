@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.termsapp.Database.Repository;
 import com.example.termsapp.Entity.Assessment;
-import com.example.termsapp.Entity.Course;
 import com.example.termsapp.R;
 
 import java.text.ParseException;
@@ -61,12 +60,12 @@ public class AssessmentDetail extends AppCompatActivity {
         aName = getIntent().getStringExtra("aName");
         aNameEdit.setText(aName);
 
+        aType = getIntent().getStringExtra("aType");
         aTypeSpinner = findViewById(R.id.assessmentTypeSpinner);
         ArrayAdapter<CharSequence> typeAdapter = ArrayAdapter.createFromResource(this, R.array.type_array, android.R.layout.simple_spinner_item);
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         aTypeSpinner.setAdapter(typeAdapter);
-        aTypeSpinner.setSelection(0);
-        aType = aTypeSpinner.getSelectedItem().toString();
+        aTypeSpinner.setSelection(getTypeInt());
 
         // testing for datePicker below
         String dateFormat = "MM/dd/yy";
@@ -147,26 +146,40 @@ public class AssessmentDetail extends AppCompatActivity {
         saveAssessmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // save
                 Assessment assessment;
                 repository = new Repository(getApplication());
-                if (aID == -1) {
-                    if (repository.getAllAssessments().size() == 0) {
-                        aID = 1;
+                Date d1 = null;
+                Date d2 = null;
+                try {
+                    d1 = sdf.parse(aStartEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    d2 = sdf.parse(aEndEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (d2.before(d1)) {
+                    Toast.makeText(AssessmentDetail.this, getString(R.string.dateError), Toast.LENGTH_LONG).show();
+                } else  {
+                    if (aID == -1) {
+                        if (repository.getAllAssessments().size() == 0) {
+                            aID = 1;
+                        } else {
+                            aID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
+                        }
+                        assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
+                        repository.insert(assessment);
+                        Toast.makeText(AssessmentDetail.this, "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        aID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
+                        assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
+                        repository.update(assessment);
+                        Toast.makeText(AssessmentDetail.this, "Assessment Updated Successfully", Toast.LENGTH_LONG).show();
                     }
-                    assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
-                    repository.insert(assessment);
-                    Toast.makeText(AssessmentDetail.this, "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
+                    AssessmentDetail.this.finish();
                 }
-                else {
-                    assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
-                    repository.update(assessment);
-                    Toast.makeText(AssessmentDetail.this, "Assessment Updated Successfully", Toast.LENGTH_LONG).show();
-                }
-                AssessmentDetail.this.finish();
             }
         });
 
@@ -184,26 +197,42 @@ public class AssessmentDetail extends AppCompatActivity {
                 return true;
 
             case R.id.saveAssessment:
-                // save
                 Assessment assessment;
                 repository = new Repository(getApplication());
-                if (aID == -1) {
-                    if (repository.getAllAssessments().size() == 0) {
-                        aID = 1;
-                    }
-                    else {
-                        aID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
-                    }
-                    assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
-                    repository.insert(assessment);
-                    Toast.makeText(this, "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
+                String dateFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
+                Date d1 = null;
+                Date d2 = null;
+                try {
+                    d1 = sdf.parse(aStartEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                else {
-                    assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
-                    repository.update(assessment);
-                    Toast.makeText(this, "Assessment Updated Successfully", Toast.LENGTH_LONG).show();
+                try {
+                    d2 = sdf.parse(aEndEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                this.finish();
+                if (d2.before(d1)) {
+                    Toast.makeText(AssessmentDetail.this, getString(R.string.dateError), Toast.LENGTH_LONG).show();
+                }
+                else    {
+                    if (aID == -1) {
+                        if (repository.getAllAssessments().size() == 0) {
+                            aID = 1;
+                            assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
+                            repository.insert(assessment);
+                            Toast.makeText(this, "Assessment Saved Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            aID = repository.getAllAssessments().get(repository.getAllAssessments().size() - 1).getAssessmentID() + 1;
+                            assessment = new Assessment(aID, aNameEdit.getText().toString(), aTypeSpinner.getSelectedItem().toString(), aStartEdit.getText().toString(), aEndEdit.getText().toString(), cID);
+                            repository.update(assessment);
+                            Toast.makeText(this, "Assessment Updated Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        this.finish();
+                    }
+                }
                 return true;
 
             case R.id.deleteAssessment:
@@ -220,7 +249,7 @@ public class AssessmentDetail extends AppCompatActivity {
                 String startDate = aStartEdit.getText().toString();
                 String startName = aNameEdit.getText().toString();
                 String format = "MM/dd/yy";
-                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                sdf = new SimpleDateFormat(format, Locale.US);
                 Date myStartDate = null;
                 try {
                     myStartDate = sdf.parse(startDate);
@@ -268,4 +297,19 @@ public class AssessmentDetail extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         aEndEdit.setText(sdf.format(endCalendar.getTime()));
     }
+
+    private int getTypeInt() {
+        int typeInt = 0;
+        for (Assessment a : repository.getAllAssessments()) {
+            if (a.getAssessmentID() == aID) {
+                if (a.getAssessmentType().contains("Perf")) {
+                    typeInt = 1;
+                }
+            }
+            else typeInt = 0;
+            break;
+        }
+        return typeInt;
+    }
+
 }

@@ -151,7 +151,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         ArrayAdapter<CharSequence> statusAdapter = ArrayAdapter.createFromResource(this, R.array.status_array, android.R.layout.simple_spinner_item);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         cStatusSpinner.setAdapter(statusAdapter);
-        cStatusSpinner.setSelection(0);
+        cStatusSpinner.setSelection(getStatusInt());
         cStatus = cStatusSpinner.getSelectedItem().toString();
 
         iNameEdit = findViewById(R.id.courseInstNameEditText);
@@ -173,26 +173,45 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         tID = getIntent().getIntExtra("termID", -1);
 
         saveCourseButton = findViewById(R.id.saveCourseButton);
-
         saveCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Course course;
                 repository = new Repository(getApplication());
-                if (cID == -1) {
-                    if (repository.getAllCourses().size() == 0)
-                        cID = 1;
-                    else
-                        cID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
-                    repository.insert(course);
-                    Toast.makeText(CourseDetailAssessmentList.this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
-                } else {
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), getIntent().getIntExtra("tID", -1));
-                    repository.update(course);
-                    Toast.makeText(CourseDetailAssessmentList.this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
+                Date d1 = null;
+                Date d2 = null;
+                try {
+                    d1 = sdf.parse(cStartEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                CourseDetailAssessmentList.this.finish();
+                try {
+                    d2 = sdf.parse(cEndEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (d2.before(d1)) {
+                    Toast.makeText(CourseDetailAssessmentList.this, getString(R.string.dateError), Toast.LENGTH_LONG).show();
+                }
+                else {
+                    if (cID == -1) {
+                        if (repository.getAllCourses().size() == 0) {
+                            cID = 1;
+                        }
+                        else {
+                            cID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
+                        }
+                        course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
+                        repository.insert(course);
+                        Toast.makeText(CourseDetailAssessmentList.this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
+                        }
+                    else {
+                        course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), getIntent().getIntExtra("tID", -1));
+                        repository.update(course);
+                        Toast.makeText(CourseDetailAssessmentList.this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
+                    }
+                    CourseDetailAssessmentList.this.finish();
+                }
             }
         });
 
@@ -231,20 +250,38 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
             case R.id.saveCourse:
                 Course course;
                 repository = new Repository(getApplication());
-                if (cID == -1) {
-                    if (repository.getAllCourses().size() == 0)
-                        cID = 1;
-                    else
-                        cID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
-                    repository.insert(course);
-                    Toast.makeText(this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
-                } else {
-                    course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), getIntent().getIntExtra("tID", -1));
-                    repository.update(course);
-                    Toast.makeText(this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
+                String dateFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
+                Date d1 = null;
+                Date d2 = null;
+                try {
+                    d1 = sdf.parse(cStartEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
                 }
-                this.finish();
+                try {
+                    d2 = sdf.parse(cEndEdit.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (d2.before(d1)) {
+                    Toast.makeText(CourseDetailAssessmentList.this, getString(R.string.dateError), Toast.LENGTH_LONG).show();
+                } else  {
+                    if (cID == -1) {
+                        if (repository.getAllCourses().size() == 0)
+                            cID = 1;
+                        else
+                            cID = repository.getAllCourses().get(repository.getAllCourses().size() - 1).getCourseID() + 1;
+                        course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), tID);
+                        repository.insert(course);
+                        Toast.makeText(this, "Course Saved Successfully", Toast.LENGTH_LONG).show();
+                    } else {
+                        course = new Course(cID, cNameEdit.getText().toString(), cStartEdit.getText().toString(), cEndEdit.getText().toString(), cStatusSpinner.getSelectedItem().toString(), iNameEdit.getText().toString(), iPhoneEdit.getText().toString(), iEmailEdit.getText().toString(), oNoteEdit.getText().toString(), getIntent().getIntExtra("tID", -1));
+                        repository.update(course);
+                        Toast.makeText(this, "Course Updated Successfully", Toast.LENGTH_LONG).show();
+                    }
+                    this.finish();
+                }
                 return true;
 
             case R.id.deleteCourse:
@@ -271,7 +308,7 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
                 String startDate = cStartEdit.getText().toString();
                 String startName = cNameEdit.getText().toString();
                 String format = "MM/dd/yy";
-                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+                sdf = new SimpleDateFormat(format, Locale.US);
                 Date myStartDate = null;
                 try {
                     myStartDate = sdf.parse(startDate);
@@ -320,8 +357,25 @@ public class CourseDetailAssessmentList extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         cEndEdit.setText(sdf.format(endCalendar.getTime()));
     }
+    private int getStatusInt() {
+        int statusInt = 0;
+        for (Course c : repository.getAllCourses()) {
+            if (c.getCourseID() == cID) {
+                if (c.getCourseStatus().contains("Plan")) {
+                    statusInt = 0;
+                } else if (c.getCourseStatus().contains("Progress")) {
+                    statusInt = 1;
+                } else if (c.getCourseStatus().contains("Comp")) {
+                    statusInt = 2;
+                } else {
+                    statusInt = 3;
+                }
+            }
+        }
+        return statusInt;
+    }
 
-    // do i need onResume here??
+
     @Override protected void onResume() {
 
         super.onResume();

@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (MainActivity.matchExists) {
                     Intent intent = new Intent(LoginActivity.this, TermList.class);
-                    intent.putExtra("uID", idToSend); // this is where i started playing fifa
+                    intent.putExtra("l_uID", idToSend);
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
                     startActivity(intent);
                 } else if (usernameEdit.getText().toString().equals("") && passwordEdit.getText().toString().equals("")) {

@@ -1,7 +1,6 @@
 package com.example.termsapp.Database;
 
 import android.app.Application;
-import android.widget.Adapter;
 
 import com.example.termsapp.DAO.AssessmentDAO;
 import com.example.termsapp.DAO.CourseDAO;
@@ -11,6 +10,7 @@ import com.example.termsapp.Entity.Assessment;
 import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
 import com.example.termsapp.Entity.User;
+import com.example.termsapp.R;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -216,5 +216,4 @@ public class Repository {
             e.printStackTrace();
         }
     }
-
 }

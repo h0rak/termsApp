@@ -15,7 +15,7 @@ import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
 import com.example.termsapp.Entity.User;
 
-@Database(entities = {User.class, Term.class, Course.class, Assessment.class}, version = 11, exportSchema = false)
+@Database(entities = {User.class, Term.class, Course.class, Assessment.class}, version = 17, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract UserDAO userDAO();

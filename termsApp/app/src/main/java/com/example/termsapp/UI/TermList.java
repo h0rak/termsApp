@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.termsapp.Database.Repository;
+import com.example.termsapp.Entity.Assessment;
+import com.example.termsapp.Entity.Course;
 import com.example.termsapp.Entity.Term;
 import com.example.termsapp.Entity.User;
 import com.example.termsapp.R;
@@ -22,6 +24,10 @@ import java.util.List;
 public class TermList extends AppCompatActivity {
 
     int uID;
+    int totalTerms;
+    int totalCourses;
+    int totalAssessments;
+    String reportBuilder;
 
 
     @Override
@@ -29,7 +35,7 @@ public class TermList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
         MainActivity.matchExists = false;
-        uID = getIntent().getIntExtra("uID", -1);
+        uID = getIntent().getIntExtra("l_uID", -1);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         Repository repository = new Repository(getApplication());
         final TermAdapter termAdapter = new TermAdapter(this); // create a final adapter
@@ -52,7 +58,6 @@ public class TermList extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,35 +66,51 @@ public class TermList extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Repository repository = new Repository(getApplication());
         switch (menuItem.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
 
-            case R.id.addSampleTerms:
-                Repository repository = new Repository(getApplication());
-                Term t1 = new Term(1, "First Term", "04/01/21", "09/31/ 21", uID);
-                repository.insert(t1);
-                Term t2 = new Term(2, "Second Term", "10/01/21", "03/31/22", uID);
-                repository.insert(t2);
-                Term t3 = new Term(3, "Third Term", "10/01/21", "03/31/22", uID);
-                repository.insert(t3);
-                Term t4 = new Term(4, "Fourth term", "10/01/22", "03/31/23", uID);
-                repository.insert(t4);
-                Term t5 = new Term(5, "Fifth Term", "01/01/23", "06/31/2023", uID);
-                repository.insert(t5);
-                List<Term> allTerms = repository.getAllTerms();
-                RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                final TermAdapter adapter = new TermAdapter(this);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                adapter.setTerms(allTerms);
+            case R.id.shareReport:
+                totalTerms = repository.getAllTerms().size();
+                totalCourses = repository.getAllCourses().size();
+                totalAssessments = repository.getAllAssessments().size();
+                List<Integer> userTermIDs = new ArrayList<>();
+                List<Integer> userCourseIDs = new ArrayList<>();
+                List<Integer> userAssessmentIDs = new ArrayList<>();
+                for (Term t : repository.getAllTerms()) {
+                    if (t.getUserID() == uID) {
+                        userTermIDs.add(t.getTermID());
+                    }
+                }
+                for (Course c : repository.getAllCourses()) {
+                    for (int userTermID : userTermIDs) {
+                        if (userTermID == c.getTermID()) {
+                            userCourseIDs.add(userTermID);
+                        }
+                    }
+                }
+                for (Assessment a : repository.getAllAssessments()) {
+                    for (int userCourseID : userCourseIDs) {
+                        if (userCourseID == a.getCourseID()) {
+                            userAssessmentIDs.add(userCourseID);
+                        }
+                    }
+                }
+
+                reportBuilder = "Report\n\nUser Totals\nTerms: " + userTermIDs.size() + "\nCourses: " + userCourseIDs.size() + "\nAssessments: " + userAssessmentIDs.size();
+                Intent intent1 = new Intent();
+                intent1.setAction(Intent.ACTION_SEND);
+                intent1.putExtra(Intent.EXTRA_TITLE, "Choose Report Sharing Option");
+                intent1.putExtra(Intent.EXTRA_TEXT, reportBuilder);
+                intent1.setType("text/plain");
+                Intent intent2 = Intent.createChooser(intent1, null);
+                startActivity(intent2);
                 return true;
         }
         return super.onOptionsItemSelected(menuItem);
     }
-
-
 
     @Override
     protected void onResume() {

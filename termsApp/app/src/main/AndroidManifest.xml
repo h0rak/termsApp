@@ -57,7 +57,7 @@
             android:name=".UI.LoginActivity"
             android:exported="false"
             android:label="Term List"
-            android:parentActivityName=".UI.MainActivity">
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
